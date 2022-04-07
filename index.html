@@ -8,7 +8,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://gitee.com/No-day/for-picgo/raw/master/image-20220403215142052.png" alt="image-20220403215142052"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220403215142052.png" alt="image-20220403215142052"></p>
 <h3 id="security-init-cookie"><a href="#security-init-cookie" class="headerlink" title="__security_init_cookie"></a>__security_init_cookie</h3><blockquote>
 <p>The purpose of this cookie is best described by <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/security-init-cookie?view=msvc-170">MSDN</a></p>
 <p>全局安全 cookie 用于在使用 &#x2F;GS（缓冲区安全检查）编译的代码和使用异常处理的代码中进行缓冲区溢出保护。</p>
@@ -19,7 +19,7 @@
 <p><strong><code>__security_init_cookie</code></strong> when you define your own entry point.</p>
 <blockquote>
 <p>we can use the opcode <code>48 89 5C 24 20 55 48 8B EC 48 83 EC 20</code> to find the <code>__security_init_cookie</code></p>
-<p><img src="https://gitee.com/No-day/for-picgo/raw/master/image-20220403230636976.png" alt="image-20220403230636976"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220403230636976.png" alt="image-20220403230636976"></p>
 </blockquote>
 <p>The call to <strong><code>__security_init_cookie</code></strong> must be made before any overrun-protected function is entered; otherwise a  spurious buffer overrun will be detected. For more information, see <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/c-runtime-error-r6035?view=msvc-170">C Runtime Error R6035</a>.</p>
 <h3 id="scrt-common-main-seh"><a href="#scrt-common-main-seh" class="headerlink" title="__scrt_common_main_seh"></a>__scrt_common_main_seh</h3><p>Looking at this code without labels (for example in x64dbg) it can be confusing to identify where main is. Luckily MSVC console applications all have the same main function prototype.</p>
@@ -29,18 +29,18 @@
 <p>This function prototype can be used to identify the call to main in __scrt_common_main_seh, simply by looking for the three arguments that are passed to main: <em>argc</em>, <em>argv</em>, <em>envp</em>.</p>
 <ul>
 <li><p>In 64-bit binaries these arguments are compiled into a series of three <em>mov</em> instructions moving the arguments into the registers <code>RCX, RDX, R8</code></p>
-<p> <img src="https://gitee.com/No-day/for-picgo/raw/master/image-20220403225145892.png" alt="image-20220403225145892"></p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220403225145892.png" alt="image-20220403225145892"></p>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4C 8B C7                mov     r8, rdi         ; envp</span><br><span class="line">48 8B D3                mov     rdx, rbx        ; argv</span><br><span class="line">8B 08                   mov     ecx, [rax]      ; argc</span><br></pre></td></tr></table></figure>
 
 </li>
 <li><p>In 32-bit binaries these arguments are compiled into a series of three <em>push</em> instructions pushing the arguments onto the stack.</p>
-<p> <img src="https://gitee.com/No-day/for-picgo/raw/master/image-20220403225150632.png" alt="image-20220403225150632"></p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220403225150632.png" alt="image-20220403225150632"></p>
 </li>
 </ul>
 <blockquote>
 <p>！！！！！！These patterns can be relied on to identify main. ！！！！！！！</p>
 </blockquote>
-</p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-04-04</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 637 words, 2 min 7 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/04/01/keylog/">keylog</a></h3></div><div class="post-content"><div class="card"><p><blockquote>
+</p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-04-04</span><i class="fa fa-tag"></i><a class="tag" href="/tags/msvc/" title="msvc">msvc </a><span class="leancloud_visitors"></span><span>About 637 words, 2 min 7 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/04/01/keylog/">keylog</a></h3></div><div class="post-content"><div class="card"><p><blockquote>
 <p>样本来源：lab03-03</p>
 <p>md5: e2bf42217a67e46433da8b6f4507219e</p>
 </blockquote>
