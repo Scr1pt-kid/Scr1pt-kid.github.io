@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="scr1pt"><title>calling-convention · scr1pt's blog</title><meta name="description" content="Calling ConventionsThere are different calling conventions for different operating systems or different bits of systemor you compile with the vs (or o"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/scr1pt.jpg"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a href="/">Home</a></li><li> <a href="/archives">Archives</a></li><li> <a href="/tags">Tags</a></li><li> <a href="/about">About</a></li><li> <a href="/links">Links</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/scr1pt.jpg"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/scr1pt.jpg" style="width:200px;" alt="favicon"><h3 title=""><a href="/">scr1pt's blog</a></h3><div class="description"><p>my dear virus, please fuck me</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/scr1pt-kid"><i class="fa fa-github"></i></a></li><li><a href="mailto:2466811523@qq.com"><i class="fa fa-envelope"></i></a></li><li><a target="_blank" rel="noopener" href="http://sighttp.qq.com/authd?IDKEY=2466811523"><i class="fa fa-qq"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> scr1pt</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>calling-convention</a></h3></div><div class="post-content"><p><h1 id="Calling-Conventions"><a href="#Calling-Conventions" class="headerlink" title="Calling Conventions"></a>Calling Conventions</h1><p>There are different calling conventions for different operating systems <strong>or</strong> different bits of system<br><strong>or</strong> you compile with the vs (or others)</p>
+<ul>
+<li>Different conventions based on processor,OS,and Language Describe how are passed to functions</li>
+<li>Describe how are returned from functions</li>
+<li>Describe if the caller or callee <code>clean the stack</code></li>
+<li>Resonsible for function and<code>prologue</code>and<code>epilogue</code></li>
+</ul>
+<h2 id="Windows-x86-Calling-Convention"><a href="#Windows-x86-Calling-Convention" class="headerlink" title="Windows x86 Calling Convention"></a>Windows x86 Calling Convention</h2><table>
+<thead>
+<tr>
+<th align="left">Keyword</th>
+<th align="left">Stack cleanup</th>
+<th align="left">Parameter passing</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/cdecl?view=msvc-170">__cdecl</a></td>
+<td align="left">Caller</td>
+<td align="left">Pushes parameters on the stack, in reverse order (right to left)</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/clrcall?view=msvc-170">__clrcall</a></td>
+<td align="left">n&#x2F;a</td>
+<td align="left">Load parameters onto CLR expression stack in order (left to right).</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/stdcall?view=msvc-170">__stdcall</a></td>
+<td align="left">Callee</td>
+<td align="left">Pushes parameters on the stack, in reverse order (right to left)</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/fastcall?view=msvc-170">__fastcall</a></td>
+<td align="left">Callee</td>
+<td align="left">Stored in registers, then pushed on stack</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/thiscall?view=msvc-170">__thiscall</a></td>
+<td align="left">Callee</td>
+<td align="left">Pushed on stack; <strong><code>this</code></strong> pointer stored in ECX</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/vectorcall?view=msvc-170">__vectorcall</a></td>
+<td align="left">Callee</td>
+<td align="left">Stored in registers, then pushed on stack in reverse order (right to left)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>All arguments are widened to 32 bits(DWORD)</li>
+<li>Return value is widened to 32 bits(DWORD)</li>
+<li>Return values up to 32 bits are returned to <code>eax</code> register</li>
+<li>Return values of 64 bit size(QWORD) are returned in EDX:EAX(The main value is in the EDX Register)</li>
+<li>Return Structures are returned by reference with a pointer in EAX</li>
+<li>Registers ESI,EDI,EBX,and EBP are restored(non-volatile)</li>
+<li>MSDN is your friend</li>
+</ul>
+<h3 id="cdecl"><a href="#cdecl" class="headerlink" title="__cdecl"></a><code>__cdecl</code></h3><ul>
+<li><p>Default calling convention for c and c++</p>
+</li>
+<li><p>Arguments are passed on the stack(pushed right-to-left)</p>
+</li>
+<li><p>Called is responsible for stack cleanup will (cdecl will clean the stack )</p>
+<ul>
+<li><p>this is important when there are variadic functions,so function doesn’t</p>
+<p>worry about stack cleaning.</p>
+</li>
+</ul>
+</li>
+<li><p>Supports varag(variadic)functions</p>
+</li>
+</ul>
+<p>Example code below:</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220407182649772.png" alt="image-20220407182649772"></p>
+<p>then we can get follow code with ida</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220407182717320-20220407202633645-20220407202659160.png" alt="image-20220407182717320"></p>
+<ul>
+<li>sub_401090 is the hello1 function</li>
+<li>sub_401000 is the addingNumberVariadic function which is variadic<ul>
+<li>notice that caller clean the stack when the function return</li>
+</ul>
+</li>
+</ul>
+<h3 id="stdcall"><a href="#stdcall" class="headerlink" title="__stdcall"></a>__stdcall</h3><p>The <strong><code>__stdcall</code></strong> calling convention is used to call Win32 API functions. <code>The callee cleans the stack</code>, so the compiler makes <code>vararg</code> functions <strong><code>__cdecl</code></strong>. Functions that use this calling convention require a function prototype. The <strong><code>__stdcall</code></strong> modifier is Microsoft-specific.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Argument-passing order</td>
+<td>Right to left.</td>
+</tr>
+<tr>
+<td>Argument-passing convention</td>
+<td>By value, unless a pointer or reference type is passed.</td>
+</tr>
+<tr>
+<td>Stack-maintenance responsibility</td>
+<td>Called function pops its own arguments from the stack.</td>
+</tr>
+<tr>
+<td>Name-decoration convention</td>
+<td>An underscore (<code>_</code>) is prefixed to the name. The name is followed by the at sign (<code>@</code>) followed by the number of bytes (in decimal) in the argument list. Therefore, the function declared as <code>int func( int a, double b )</code> is decorated as follows: <code>_func@12</code></td>
+</tr>
+</tbody></table>
+<h3 id="fastcall"><a href="#fastcall" class="headerlink" title="__fastcall"></a>__fastcall</h3><p>The <strong><code>__fastcall</code></strong> calling convention specifies that arguments to functions are to be passed in registers, when possible. This calling convention only applies to the x86 architecture. The following list shows the implementation of this calling convention.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Element</th>
+<th align="left">Implementation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Argument-passing order</td>
+<td align="left">The first two DWORD or smaller arguments that are found in the argument list from left to right are passed in ECX and EDX registers; all other arguments are passed on the stack from right to left.</td>
+</tr>
+<tr>
+<td align="left">Stack-maintenance responsibility</td>
+<td align="left">Called function pops the arguments from the stack.</td>
+</tr>
+<tr>
+<td align="left">Name-decoration convention</td>
+<td align="left">At sign (@) is prefixed to names; an at sign followed by the number of bytes (in decimal) in the parameter list is suffixed to names.</td>
+</tr>
+<tr>
+<td align="left">Case-translation convention</td>
+<td align="left">No case translation performed.</td>
+</tr>
+</tbody></table>
+<h3 id="thiscall"><a href="#thiscall" class="headerlink" title="__thiscall"></a>__thiscall</h3><p>The <strong>Microsoft-specific</strong> <strong><code>__thiscall</code></strong> calling convention is used on C++ class member functions on the x86 architecture. It’s the default calling convention used by member functions that don’t use variable arguments (<code>vararg</code> functions).</p>
+<p>Under __thiscall, <code>the callee cleans the stack</code>, which is impossible for <code>vararg functions</code>. Arguments are pushed on the stack from right to left. <u>The <strong><code>this</code></strong> pointer is passed via register ECX, and not on the stack</u>.</p>
+<blockquote>
+<p><code>vararg</code> member functions use the <strong><code>__cdecl</code></strong> calling convention. All function arguments are pushed on the stack, with the <strong><code>this</code></strong> pointer placed on the stack last.</p>
+</blockquote>
+<p>Because this calling convention applies only to C++, it doesn’t have a C name decoration scheme.</p>
+<p>When you define a non-static class member function out-of-line, specify the calling convention modifier only in the declaration. You don’t have to specify it again on the out-of-line definition. The compiler uses the calling convention specified during declaration at the point of definition.</p>
+<h3 id="vectorcall"><a href="#vectorcall" class="headerlink" title="__vectorcall"></a>__vectorcall</h3><p>The <strong><code>__vectorcall</code></strong> calling convention specifies that arguments to functions are to be passed in registers. <strong><code>__vectorcall</code></strong> uses more registers for arguments than <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/fastcall?view=msvc-170"><code>__fastcall</code></a> or the default <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/build/x64-calling-convention?view=msvc-170">x64 calling convention</a>(rcx rdx r7 r8 [rsp+[size of arg]) use. The <strong><code>__vectorcall</code></strong> calling convention is only supported in native code on x86 and x64 processors that<u>  include Streaming SIMD Extensions 2 (SSE2) and above.</u> Use <strong><code>__vectorcall</code></strong> to speed functions that pass several floating-point or SIMD vector arguments and perform operations that take advantage of the arguments loaded in registers. The following list shows the features that are common to the x86 and x64 implementations of <strong><code>__vectorcall</code></strong>. The differences are explained later in this article.</p>
+<blockquote>
+<p>to be continue one day</p>
+</blockquote>
+<p>Reference:</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/cpp/cpp/argument-passing-and-naming-conventions?view=msvc-170">https://docs.microsoft.com/en-us/cpp/cpp/argument-passing-and-naming-conventions?view=msvc-170</a></p>
+</p><div class="tip">本文采用CC-BY-SA-3.0协议，转载请注明出处<br>Author: scr1pt</div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-04-07</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 834 words, 2 min 46 sec  read</span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://Scr1pt-kid.github.io/2022/04/07/calling-convention/,scr1pt's blog,calling-convention,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2022/04/04/oep-tricks/" title="oep_tricks">Next</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"Posts",PAGES:"Pages",CATEGORIES:"Categories",TAGS:"Tags",UNTITLED:"(Untitled)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
