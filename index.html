@@ -1,4 +1,389 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="scr1pt"><title>scr1pt's blog</title><meta name="description" content="my dear virus, please fuck me"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/scr1pt.jpg"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a class="current" href="/">Home</a></li><li> <a href="/archives">Archives</a></li><li> <a href="/tags">Tags</a></li><li> <a href="/about">About</a></li><li> <a href="/links">Links</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)" style="display:none;"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/scr1pt.jpg"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/scr1pt.jpg" style="width:200px;" alt="favicon"><h3 title=""><a href="/">scr1pt's blog</a></h3><div class="description"><p>my dear virus, please fuck me</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/scr1pt-kid"><i class="fa fa-github"></i></a></li><li><a href="mailto:2466811523@qq.com"><i class="fa fa-envelope"></i></a></li><li><a target="_blank" rel="noopener" href="http://sighttp.qq.com/authd?IDKEY=2466811523"><i class="fa fa-qq"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> scr1pt</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/04/30/conti%20v3%20source%20code%20learning/">Conti v3 Ransomeware Souce Code Analysis</a></h3></div><div class="post-content"><div class="card"><p><h2 id="prockiller"><a href="#prockiller" class="headerlink" title="prockiller"></a>prockiller</h2><h3 id="prockiller-1"><a href="#prockiller-1" class="headerlink" title="prockiller"></a>prockiller</h3><h4 id="memorySnapshot"><a href="#memorySnapshot" class="headerlink" title="memorySnapshot"></a>memorySnapshot</h4><ul>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="scr1pt"><title>scr1pt's blog</title><meta name="description" content="my dear virus, please fuck me"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/scr1pt.jpg"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.1.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a class="current" href="/">Home</a></li><li> <a href="/archives">Archives</a></li><li> <a href="/tags">Tags</a></li><li> <a href="/about">About</a></li><li> <a href="/links">Links</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)" style="display:none;"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/scr1pt.jpg"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/scr1pt.jpg" style="width:200px;" alt="favicon"><h3 title=""><a href="/">scr1pt's blog</a></h3><div class="description"><p>my dear virus, please fuck me</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/scr1pt-kid"><i class="fa fa-github"></i></a></li><li><a href="mailto:2466811523@qq.com"><i class="fa fa-envelope"></i></a></li><li><a target="_blank" rel="noopener" href="http://sighttp.qq.com/authd?IDKEY=2466811523"><i class="fa fa-qq"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> scr1pt</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/05/22/cppLearning/">cppReverse</a></h3></div><div class="post-content"><div class="card"><p><blockquote>
+<p>Reference:</p>
+<p><a target="_blank" rel="noopener" href="https://f002.backblazeb2.com/file/sec-news-backup/files/writeup/www.cmlab.csie.ntu.edu.tw/__cathyp_eBooks_C___Reverse_20c___pdf/index.pdf">https://f002.backblazeb2.com/file/sec-news-backup/files/writeup/www.cmlab.csie.ntu.edu.tw/__cathyp_eBooks_C___Reverse_20c___pdf/index.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.blackhat.com/presentations/bh-dc-07/Sabanal_Yason/Paper/bh-dc-07-Sabanal_Yason-WP.pdf">https://www.blackhat.com/presentations/bh-dc-07/Sabanal_Yason/Paper/bh-dc-07-Sabanal_Yason-WP.pdf</a></p>
+</blockquote>
+<h2 id="judge-c"><a href="#judge-c" class="headerlink" title="judge c++"></a>judge c++</h2><p>As a natural way to start, the reverser must first determine if a specific target is indeed a compiled C++ binary and is using C++ constructs. Below are some pertinent indications that the binary being analyzed is a C++ binary and is using C++ constructs.</p>
+<ol>
+<li>Heavy use of ECX(this ptr),One of the first things that a reverser may see is the heavy use of ecx (which is used as the this pointer). One place the reverser may see it is that it is being assigned a value just before a function is about to be called:</li>
+</ol>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520195013869.png" alt="image-20220520195013869"></p>
+<p>Another place is if a function is using ecx without first initializing it, which suggests that this is a possible class member function:</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520195000763.png" alt="image-20220520195000763"></p>
+<h3 id="calling-convention"><a href="#calling-convention" class="headerlink" title="calling convention"></a>calling convention</h3><p>Calling Convention. Related to (1), Class member functions are called with the usual function parameters in the stack and with ecx pointing to the class’s object (i.e. this pointer.). Here is an example of a class instantxiation, in which the allocated class object (eax) will eventually be passed to ecx and then invocation of the constructor follows.</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520195810536.png" alt="image-20220520195810536"></p>
+<p>此外，reverser要注意到间接函数调用，这些调用更可能是虚拟函数；当然，如果不首先了解实际类或在调试器下运行代码，很难跟踪这些调用的去向。考虑以下虚拟函数调用示例：</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520200722178.png" alt="image-20220520200722178"></p>
+<p>在这种情况下，reverser必须首先知道ClassA的虚拟函数表（vftable）的位置，然后根据vftable中列出的函数列表确定函数的实际地址。</p>
+<h2 id="类实例结构"><a href="#类实例结构" class="headerlink" title="类实例结构"></a>类实例结构</h2><h3 id="普通类"><a href="#普通类" class="headerlink" title="普通类"></a>普通类</h3><p>在我们深入之前我们应该熟悉类在内存中的结构布局</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520214836110.png" alt="image-20220520214836110"></p>
+<p>我们需要把padding增加到最后一个成员变量以确保size为4字节的倍数。</p>
+<h3 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h3><p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520215713706.png" alt="image-20220520215713706"></p>
+<p>here’s the class layout</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520215739428.png" alt="image-20220520215739428"></p>
+<p>请注意，在布局的开头添加了指向虚拟函数表的指针。此表按声明顺序包含虚拟函数的地址。Ex2类的虚拟函数表将像这样。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520220019231.png" alt="image-20220520220019231"></p>
+<p>现在，如果一个类从另一个类继承呢？以下是当一个类从单个类（即单个继承）继承时会发生什么：</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520220112250.png" alt="image-20220520220112250"></p>
+<p>And the layout,我们可以看到存在两个var1在这个内存中。<img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520220551662.png" alt="image-20220520220551662"></p>
+<p>如您所见，派生类的布局简单地附加到基类的布局中。在多次继承的情况下，情况如下：</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220520221648717.png" alt="image-20220520221648717"></p>
+<p>如您所见，如果每个基类的实例数据将嵌入派生类的实例中，并且每个包含虚拟函数的基类将有自己的vftable。请注意，fist base class与当前对象共享vftable。当前对象的虚拟函数将附加到第一个基类虚拟函数列表的末尾</p>
+<h2 id="类识别"><a href="#类识别" class="headerlink" title="类识别"></a>类识别</h2><p>我们上面已经讨论了如何判断一个程序是不是用 C++写的，讨论了类的构造函数以及内存中类的实例的组织形式，这一节我们来讨论 C++的类在可执行文件 中的使用情况。我们先来讨论如何确定内存中哪些部分是类(或者称为对象)下 一节再来讨论如何确定类之间的关系以及类中的成员。</p>
+<ol>
+<li><p>识别构造函数和析构函数</p>
+<ol>
+<li><p>全局对象。全局对象顾名思义就是那些被声明为全局变量的对象。这些对象的内存空间在编译时就已经被分配好了的， 它们位于可执行文件的数据段中。这些对象的构造函数是在这个程序启动以后，main调用之前被调用执行的，而它们的析构函数是在程序退出（exit）时被调用的。</p>
+<p> 一般来说，如果我们发现一个函数调用时，传入的是this指针（一般是使用ecx寄存器）是指向一个全局变量的话，我们基本可以确定，这是一个全局变量，我们可以利用交叉引用找到该全局变量的构造函数和析构函数，如果该段代码位于entrypoint和main函数之间，那么很有可能这个为构造函数</p>
+<p> main函数</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_main proc near</span><br><span class="line"></span><br><span class="line">argc= dword ptr  <span class="number">4</span></span><br><span class="line">argv= dword ptr  <span class="number">8</span></span><br><span class="line">envp= dword ptr  <span class="number">0</span>Ch</span><br><span class="line"></span><br><span class="line">mov     dword_403378, <span class="number">3</span></span><br><span class="line"><span class="keyword">xor</span>     eax, eax</span><br><span class="line">retn</span><br><span class="line">_main endp</span><br></pre></td></tr></table></figure>
+
+<p> 通过交叉引用可以找到两处，也就是构造函数和析构函数</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521141409121.png" alt="image-20220521141409121"></p>
+<p> 跟进构造函数,<code>_atexit</code>注册了程序终止的函数为析构函数</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521141914948.png" alt="image-20220521141914948"></p>
+<p> 运行到返回后发现程序位于entrypoint和main函数之间，属于编译器生成的代码，通过call _initterm函数调用了构造函数</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521143307579.png" alt="image-20220521143307579"></p>
+</li>
+<li><p>局部对象。这些对象的作用域起始于该对象被声明的地方，结束于声明该对象的模块退出之时(比如函数结尾或者分支结束的地方，下面例子里就是在一个 if 语句块 结束的地方调用析构函数的)。局部对象在内存中是位于栈(stack)里的。 它们的构造函数在该对象声明的地方被调用，而在对象离开其作用域时调用 对象的析构函数。<br> 局部对象的构造函数还是比较容易识别的，如果你发现一个函数调用， 传递过去的 this 指针竟然是指向了栈中一个未被初始化过的变量的话，你基 本上可以确定这个函数是一个对象的构造函数，同时也就发现了一个对象。 析构函数一般则是与构造函数位于同一个模块(也就是声明该对象的模块) 的最后一个使用指向该对象的 this 指针的函数。</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521150912632.png" alt="image-20220521150912632"></p>
+</li>
+<li><p>动态分配的对象，这种对象是通过new操作符动态创建的对象。实际上，new操作符会变成两个符号调用：一个new()函数的调用再接着一个构造函数的调用。new()函数是用来在堆中分配空间的（对象的大小通过参数传给new函数），然后把心分配的地址存在EAX寄存器返回出来。同样delete也会变成析构函数和free()函数。</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521152155003.png" alt="image-20220521152155003"></p>
+</li>
+</ol>
+</li>
+<li><p>通过RTTI进行多态类识别（Run-Time-Type Information）</p>
+</li>
+</ol>
+<p>如果C++在编译的时候启用了RTTI功能，那么我们又会多一种识别类的方法。特别是对多态类（包含虚函数的类）。RTTI是C++中提供的一种在运行时确定对象类型的机制，在C++中一般时候typeid和dynamic_cast这两个操作符来实现这一机制。这两个操作符在实现时需要获得相关类的类名，类的层次等相关信息，在实际使用VC的时候，如果你用了以上两种操作符号但没有启用RTTI，编译器将会给你一个警告。在默认情况下MSVC6.0关闭了RTTI功能。而MSVC2005中默认开启了RTTI。</p>
+<ol>
+<li><p>RTTICompleteObjectLocator</p>
+<p> 这个结构体包含了两个指针，一个指向实际的类信息，另一个指向类的继承关系。</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>DW</td>
+<td>signature</td>
+<td>Always 0 ？</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>DW</td>
+<td>offset</td>
+<td>Offset of Vtable within the class</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>DW</td>
+<td>cdoffset</td>
+<td>?</td>
+</tr>
+<tr>
+<td>0x0c</td>
+<td>DW</td>
+<td>pTypeDescription</td>
+<td>Class Information</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>DW</td>
+<td>pClassHierarchyDescription</td>
+<td>Class Hierarchy Information</td>
+</tr>
+</tbody></table>
+<p> 那么怎么找到这个结构体呢？我们只要找到虚函数表的上一个DWORD指向的即为RTTICompleteObjectLocator。</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521161903162.png" alt="image-20220521161903162"></p>
+<p> 这是RTTICompleteObjectLocator结构</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521162047050.png" alt="image-20220521162047050"></p>
+</li>
+<li><p>TypeDescriptor</p>
+<p> 位于RTTICompleteObjectLocator结构的第四个DWORD是一个指向本类的TypeDescriptor结构体的指针，TypeDescriptor这个结构体中记录了这个类的类名、</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>DW</td>
+<td>pVFTable</td>
+<td>Always points to type_info’s vftable</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>DW</td>
+<td>spare</td>
+<td>?</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>SZ</td>
+<td>name</td>
+<td>Class Name</td>
+</tr>
+</tbody></table>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521190238726.png" alt="image-20220521190238726"></p>
+</li>
+<li><p>RTTIClassHierarchyDescriptor</p>
+<p> RTTIClassHierarchyDescriptor记录了类的继承信息、包括基类的数量以及一个RTTIBaseClassDescriptor数组，RTTIBaseClassDescriptor在下面详细讨论，RTTIBaseClassDescriptor最终将指向当前各个基类的TypeDescriptor。</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>DW</td>
+<td>signature</td>
+<td>Always 0 ？</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>DW</td>
+<td>attributes</td>
+<td>Bit 0 - multiple inheritance;Bit 1 - virtual inheritance</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>DW</td>
+<td>numBaseClasses</td>
+<td>number of base classes, Count includes the class itself</td>
+</tr>
+<tr>
+<td>0x0c</td>
+<td>DW</td>
+<td>pBaseClassArray</td>
+<td>Array of RTTIBaseClassDescriptor</td>
+</tr>
+</tbody></table>
+<p> 当classG 虚拟继承了classA和classE，那么结构如下。包括ClassG自身，我们可以看到<code>numBaseClasses = 3</code>。<code>attributes = 3 </code>表示它既是多继承又是虚继承，最后一个BaseClassArray指向RTTIBaseClassDescriptor</p>
+<p> <img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521191535688.png" alt="image-20220521191535688"></p>
+</li>
+<li><p>RTTIBaseClassDescriptor</p>
+</li>
+</ol>
+<p>这个结构体包含了基类的有关信息。它包括一个指向基类的TypeDescriptor的指针和一个指向基类的RTTIClassHierarchyDescriptor的指针，（VC6.0中可能没有pBaseClassArray）。另外，它还包含有一个PMD结构体，该结构体中记录了该类中的各个基类的位置。RTTIBaseClassDescriptor结构如下。</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>DW</td>
+<td>pTypeDescriptor</td>
+<td>TypeDescriptor of the base class</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>DW</td>
+<td>numContainedBases</td>
+<td>Number of direct bases of this base class</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>DW</td>
+<td>PMD.mdisp</td>
+<td>vftable offset</td>
+</tr>
+<tr>
+<td>0x0c</td>
+<td>DW</td>
+<td>PMD.pdisp</td>
+<td>vbtable offset(-1:vftable is at displacement PMD.mdisp inside the class)</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>DW</td>
+<td>PMD.vdisp</td>
+<td>displacement of base class vftable pointer inside the vbtable</td>
+</tr>
+</tbody></table>
+<p>一个vbtable（Virtual base class table)是由多重虚拟继承生成的。因为在多重继承的情况下，有时候需要upclass。这时候就需要精确定位基类。虚基类表包含了各个基类在派生类中的位置（或者说各个基类的虚函数表在派生类中的位置，因为虚函数表是基于类的起始位置的）。</p>
+<p>根据之前所说的ClassG类声明，编译器会生成以下类结构</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521210502725.png" alt="image-20220521210502725"></p>
+<p>在如上这种情况下，vbcase存在于位移0x04处，另一方面，vbtable包含派生类内每个基类的位移：</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521210907045.png" alt="image-20220521210907045"></p>
+<p>那么我们尝试利用vbtable来确定基类的真实地址。首先可以看到ClassE的偏移是4，然后我们从虚基类表中读取出classE的偏移为16，那么16 +4 &#x3D; 20，ClassE位于ClassG +0x14 处,也就是下图的<code>0x00418b14</code>地址处。</p>
+<p>以下为ClassG中ClassE的<code>BaseClassDescriptor</code></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220521211249241.png" alt="image-20220521211249241"></p>
+<p>那么总结如下的关系图</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522091012407.png" alt="image-20220522091012407"></p>
+<h2 id="识别类关系"><a href="#识别类关系" class="headerlink" title="识别类关系"></a>识别类关系</h2><h3 id="通过构造器识别类关系"><a href="#通过构造器识别类关系" class="headerlink" title="通过构造器识别类关系"></a>通过构造器识别类关系</h3><p>构造函数包含初始化对象的代码，例如调用基类的构造函数和设置vftables。因此，分析构造函数可以让我们很好地了解这个类与其他类的关系。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522091427369.png" alt="image-20220522091427369"></p>
+<p>让我们假设我们已经确定这个函数是通过之前所说方法识别的构造函数。现在，我们看到一个函数正在使用当前对象的这个指针调用。这可以是当前类的成员函数，也可以是基类的构造函数。</p>
+<p>我们怎么知道是哪一个？事实上，仅仅通过查看生成的代码，就无法完美区分两者。然而，在现实世界的应用中，在此步骤之前，构造函数很有可能被识别在较前的位置，因此我们所要做的就是将这些信息关联起来，以得出更准确的标识。换句话说，如果使用当前对象的此指针在另一个构造函数中调用预先确定为构造函数的函数，它可能是基类的构造函数。</p>
+<p>手动识别这一点需要检查对这个函数的其他交叉引用，看看这个函数是否是二进制文件中其他地方调用的构造函数。我们将在本文件后面讨论自动识别方法。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522091913348.png" alt="image-20220522091913348"></p>
+<p>多重继承实际上比单一继承更容易发现。与单个继承示例一样，第一个调用的函数可以是成员函数，也可以是基类构造函数。请注意，在反汇编中，调用第二个函数之前，在此指针中添加4个字节。这表明正在初始化另一个基类。</p>
+<p>Here’s the layout for this class to help you visualize. The disassembly above belongs to the constructor of class D. Class D is derived from two other classes, A and C:</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522092402038.png" alt="image-20220522092402038"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522092414415.png" alt="image-20220522092414415"></p>
+<h3 id="通过RTTI识别多态类关系"><a href="#通过RTTI识别多态类关系" class="headerlink" title="通过RTTI识别多态类关系"></a>通过RTTI识别多态类关系</h3><p>我们在之前的RTTI中讲到RTTIClassHierarchyDescriptor结构体如下</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x00</td>
+<td>DW</td>
+<td>signature</td>
+<td>Always 0 ？</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>DW</td>
+<td>attributes</td>
+<td>Bit 0 - multiple inheritance;Bit 1 - virtual inheritance</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>DW</td>
+<td>numBaseClasses</td>
+<td>number of base classes, Count includes the class itself</td>
+</tr>
+<tr>
+<td>0x0c</td>
+<td>DW</td>
+<td>pBaseClassArray</td>
+<td>Array of RTTIBaseClassDescriptor</td>
+</tr>
+</tbody></table>
+<p>我们可以通过这个结构体的pBaseClassArray数组来判断非直接基类，如：类A有基类类B，类C，但是类B中存在类C，那么类C就是类A的非直接基类。以下为关系图</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522093145721.png" alt="image-20220522093145721"></p>
+<p>而其结构图如下</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522093215268.png" alt="image-20220522093215268"></p>
+<h3 id="识别类的成员"><a href="#识别类的成员" class="headerlink" title="识别类的成员"></a>识别类的成员</h3><p>识别类成员是一个简单明了的过程，尽管缓慢而乏味。我们可以通过查找相对于此指针的偏移量访问来识别类成员变量：</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522093643884.png" alt="image-20220522093643884"></p>
+<p>我们还可以通过查找对相对于此对象虚拟函数表偏移量的指针的间接调用来识别虚拟函数成员：</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522093705706.png" alt="image-20220522093705706"></p>
+<p>通过检查此指针是否作为隐藏参数传递给函数调用，可以识别非虚拟成员函数。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522093758525.png" alt="image-20220522093758525"></p>
+<p>为了确保这确实是一个成员函数，我们可以检查被调用的函数是否使用ecx，而无需首先初始化它。让我们看看sub_401110的代码</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220522093849886.png" alt="image-20220522093849886"></p>
+<ul>
+<li>通过指针偏移量来进行成员变量的赋值 mov dword ptr[eax+8], 12345h</li>
+<li>通过vftable指针来获取虚函数，关键为mov edx, [ecx],获取了虚函数指针指向的地址，然后通过mov eax, [edx+4]获取虚函数指针</li>
+<li>通过lea ecx,[ebp_var_c]，隐藏传递参数给函数调用，注意此处不是64位二进制文件<ul>
+<li>同时检查被调用的函数是否使用ecx而无需初始化，也就是直接使用之前隐藏传递进来给函数调用的对象指针</li>
+</ul>
+</li>
+</ul>
+<h2 id="Automation"><a href="#Automation" class="headerlink" title="Automation"></a>Automation</h2><p>to be continuing…</p>
+<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><p>STL代码和导入的DLL。确定示例是否为C++二进制文件的另一种方法是目标是否使用STL代码，该代码可以通过导入函数或库签名标识（如IDA的FLIRT）确定：</p>
+<p>to be continueing…</p>
+<h2 id="reverse-c-binary"><a href="#reverse-c-binary" class="headerlink" title="reverse c++ binary"></a>reverse c++ binary</h2><ul>
+<li>还原类的构造函数</li>
+<li>还原类的析构函数</li>
+<li>还原类的成员函数</li>
+<li>还原类的虚函数</li>
+<li>还原类的继承层次</li>
+<li>判断一个类是否是抽象类</li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a><strong>References</strong></h3><ul>
+<li><a target="_blank" rel="noopener" href="https://flagbot.ch/lesson6.pdf">Lesson 6: Introduction to Reversing C++ Binaries</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.blackhat.com/presentations/bh-dc-07/Sabanal_Yason/Paper/bh-dc-07-Sabanal_Yason-WP.pdf">blackhat Automation Techniques in C++ Reverse Engineering</a></li>
+</ul>
+<h3 id="Ready-IDA"><a href="#Ready-IDA" class="headerlink" title="Ready IDA"></a>Ready IDA</h3><ul>
+<li>HexRaysPyTools: Extremely useful for quickly creating structures without having to find every offset that might be a field.</li>
+<li>Classy: Makes working with vtables and child classes a lot easier.</li>
+</ul>
+<h4 id="other-settings"><a href="#other-settings" class="headerlink" title="other settings"></a>other settings</h4><ul>
+<li>Make sure to regularly create a snapshot of your database</li>
+<li>Create&#x2F;open database</li>
+<li>make sure the compiler options are correct</li>
+<li>(Optional)Always show demangled names (Options → Demangled names → Select Names)</li>
+</ul>
+<h3 id="theory"><a href="#theory" class="headerlink" title="theory"></a>theory</h3><h4 id="class-layout-in-Memory"><a href="#class-layout-in-Memory" class="headerlink" title="class layout in Memory"></a>class layout in Memory</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Ususally stored in the data section</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">vtable</span>&#123;</span><br><span class="line">    <span class="built_in">void</span> (*func1)();</span><br><span class="line">    <span class="built_in">void</span> (*func2)();</span><br><span class="line">&#125;;t</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">class</span>&#123;</span><br><span class="line">    vtable* vtbl;</span><br><span class="line">  	<span class="type">int</span> member1;</span><br><span class="line">  	<span class="type">int</span> member2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="decompiler"><a href="#decompiler" class="headerlink" title="decompiler"></a>decompiler</h4><p>this patterns means below in decompiler</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__int64 v1 = operater new(sizeof(class));</span><br><span class="line">*v1 = gvtable; // stored someware in .data</span><br><span class="line">*(v1+4) = 0;</span><br><span class="line">*(v1+8) = 0;</span><br></pre></td></tr></table></figure>
+
+<p>call a vtable function</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(*(void (*)())(*(_QWORD*)v1 + 8))();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reconstruct-Class"><a href="#Reconstruct-Class" class="headerlink" title="Reconstruct Class"></a>Reconstruct Class</h2><p>to be continue…</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>to be continue…</p>
+<h2 id="符号恢复"><a href="#符号恢复" class="headerlink" title="符号恢复"></a>符号恢复</h2><p>to be continue…</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/push0ebp/sig-database">https://github.com/push0ebp/sig-database</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Maktm/FLIRTDB">https://github.com/Maktm/FLIRTDB</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/maroueneboubakri/lscanDW">https://github.com/maroueneboubakri/lscanDW</a></p>
+</p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-05-22</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 3819 words, 12 min 43 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/05/19/virtualFunc/">Kovter__b8113a604e6c190bbd8b687fd2ba7386d4d98234f5138a71bcf15f0a3c812e91</a></h3></div><div class="post-content"><div class="card"><p><h2 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h2><p>C++是一门支持面向对象的语言，为面向对象的软件开发提供了丰富的语言支持。要想高效、正确地使用C++中的继承、多台等语言特性，就必须对这些特性的底层有一定的了解。</p>
+<p>其实，C++的对象模型的核心概念并不多，最重要的概念是虚函数。虚函数式程序运行时定义的函数。虚函数的地址不能在编译时确定，只能在调用即将进行时确定。所有对虚函数的饮用通常放在一个专用数组————虚函数表（Virtual Table，VBTL）中，数组的每个元素中存放的就是类中虚函数的地址。调用虚函数时，程序先取出虚函数指针（Virtual Table Pointer，VPTR），得到虚函数表的地址，再根据这个地址到虚函数表中取出该函数的地址，最后调用该函数。</p>
+<h2 id="x32-demo-code"><a href="#x32-demo-code" class="headerlink" title="x32 demo code"></a>x32 demo code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CSum</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (a + b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">Sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (a - b);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	CSum* pCSum = <span class="keyword">new</span> CSum;</span><br><span class="line">	pCSum-&gt;<span class="built_in">Add</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">	pCSum-&gt;<span class="built_in">Sub</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>首先会使用new函数分配class所需的内存（由IDA识别）。调用成功后保存在eax寄存器中，最后传到ecx。</p>
+<p>我们可以看到，v3指向了虚函数表，通过指针进行调用Add和Sub函数。</p>
+<p>而且需要注意到，程序以ecx作为this指针的载体传递给虚函数成员函数，并利用两次间接寻址得到虚函数的正确地址从而执行。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517132723253.png" alt="image-20220517132723253"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517132332719.png" alt="image-20220517132332719"></p>
+<p>虚函数表</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517125804861.png" alt="image-20220517125804861"></p>
+<h2 id="x64-demo-code"><a href="#x64-demo-code" class="headerlink" title="x64 demo code"></a>x64 demo code</h2><p>成员函数CVirtual,析构函数CVirtual</p>
+<p>虚函数 func1、func2</p>
+<p>私有变量 m_nMember1、m_nMember2</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*--------------------------------------------</span></span><br><span class="line"><span class="comment">《加密与解密（第四版）》</span></span><br><span class="line"><span class="comment">(c)  看雪学院 www.kanxue.com 2000-2018</span></span><br><span class="line"><span class="comment">----------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Example4-1.cpp : 定义控制台应用程序的入口点。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CVirtual</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">CVirtual</span>() &#123;</span><br><span class="line">		m_nMember1 = <span class="number">1</span>;</span><br><span class="line">		m_nMember2 = <span class="number">2</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;CVirtual()\r\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">virtual</span> ~<span class="built_in">CVirtual</span>() &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;~CVirtual()\r\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;fun1()\r\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;fun2()\r\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> m_nMember1;</span><br><span class="line">	<span class="type">int</span> m_nMember2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span> </span>&#123;</span><br><span class="line">	CVirtual object;</span><br><span class="line">	object.<span class="built_in">fun1</span>();</span><br><span class="line">	object.<span class="built_in">fun2</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for循环用于初始化栈空间为0xCC</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517143459563.png" alt="image-20220517143459563"></p>
+<h2 id="函数判断"><a href="#函数判断" class="headerlink" title="函数判断"></a>函数判断</h2><p>那么我们如何判断构造函数、析构函数？</p>
+<p>main函数在申请了对象实例空间后的第一个函数调用即可猜测为类的构造函数，调用的最后一个函数可以猜测为析构函数</p>
+<h3 id="构造函数实现"><a href="#构造函数实现" class="headerlink" title="构造函数实现"></a>构造函数实现</h3><p>首先初始化虚表指针，然后初始化数据乘员，构造函数完成，返回this指针。为什么需要返回this指针？c++编译器为了判断一个构造是否被调用而设置的。</p>
+<p>如果一个函数在入口处使用<code>lea reg,off_xxxxxxxxx</code>和<code>mov [reg],reg</code>特征初始化虚表，且返回值为this指针，就可以怀疑这个函数是一个构造函数。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517145509769.png" alt="image-20220517145509769"></p>
+<h3 id="析构函数实现"><a href="#析构函数实现" class="headerlink" title="析构函数实现"></a>析构函数实现</h3><p>首先初始化栈空间，然后赋值虚表，最后返回this指针。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517152232823.png" alt="image-20220517152232823"></p>
+<blockquote>
+<p>既然前面两个函数的流程都相同，那么如何判断构造函数和析构函数呢？</p>
+<p>————在main函数中的调用顺序</p>
+</blockquote>
+<h2 id="虚表结构"><a href="#虚表结构" class="headerlink" title="虚表结构"></a>虚表结构</h2><p>因为这个类有虚函数，所以编译器为这个类产生了一个虚表，其存储在全局数据区（.rdata）.虚表的每一项都是8个字节，其中存储的是成员函数的地址。</p>
+<blockquote>
+<p>这里需要注意：因为虚表的最后一项不一定是以0结尾，所以虚表项的个数会根据其他信息来确定</p>
+</blockquote>
+<p>虚表汇总的函数按类中成员函数声明顺序依次放入。</p>
+<blockquote>
+<p>函数分布顺序在某些情况下不一定与声明顺序相同（例如虚函数重载），不过这个顺序对逆向还原代码没有影响。</p>
+</blockquote>
+<p>在该demo code中虽然只编写了一个析构函数，编译器却生成了两个析构函数。其中一个是普通析构函数，对象出作用域调用；另一个放在虚表里，在delete对象的时候调用。</p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517153516872.png" alt="image-20220517153516872"></p>
+<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/image-20220517153449968.png" alt="image-20220517153449968"></p>
+<p>虚表中的析构函数比普通的析构函数多一个delete this操作。</p>
+<p>delete 对象的时候，需要先调用析构函数，再释放对象的堆空间。</p>
+<blockquote>
+<p>object.~CVirtual()属于多态调用，所以会直接调用虚表里的析构函数，这个时候对象被释放。delete object这句代码优惠调用虚表里的析构函数，这样堆空间会重复释放。</p>
+<p>那么为了解决这个问题，VC++编译器给析构函数增加了一个参数，pObject-&gt;~CVirtual()调用时参数传递0，这样对象就不会被释放。如果delete pObject的时候参数传递1，对象就会被释放。这样就解决了上面那个问题。</p>
+<p>gcc则采用了虚表里放两个析构函数的方法解决该问题。</p>
+</blockquote>
+</p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-05-19</span><i class="fa fa-tag"></i><a class="tag" href="/tags/c/" title="c++">c++ </a><span class="leancloud_visitors"></span><span>About 1338 words, 4 min 27 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/04/30/conti%20v3%20source%20code%20learning/">Conti v3 Ransomeware Souce Code Analysis</a></h3></div><div class="post-content"><div class="card"><p><h2 id="prockiller"><a href="#prockiller" class="headerlink" title="prockiller"></a>prockiller</h2><h3 id="prockiller-1"><a href="#prockiller-1" class="headerlink" title="prockiller"></a>prockiller</h3><h4 id="memorySnapshot"><a href="#memorySnapshot" class="headerlink" title="memorySnapshot"></a>memorySnapshot</h4><ul>
 <li>pCreateToolhelp32Snapshot</li>
 <li>pProcess32FirstW</li>
 <li>pProcess32NextW</li>
@@ -851,5 +1236,4 @@
 </ul></p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-04-01</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 952 words, 3 min 10 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/03/29/mining-sh-analysis/">mining-sh-analysis</a></h3></div><div class="post-content"><div class="card"><p><h1 id="mining-Virus-Analysis"><a href="#mining-Virus-Analysis" class="headerlink" title="mining Virus Analysis"></a>mining Virus Analysis</h1><blockquote>
 <p>md5: eeb8f9ae60c73f84ff85bbeab9c0b6ee</p>
 <p>filename: .systemd-private-nU9WagjQ8BenWPXt0ovE12uD8jBItv6</p>
-</blockquote></p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-03-29</span><i class="fa fa-tag"></i><a class="tag" href="/tags/linux/" title="linux">linux </a><span class="leancloud_visitors"></span><span>About 1108 words, 3 min 41 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/03/23/bokbot-analysis/">bokbot-analysis</a></h3></div><div class="post-content"><div class="card"><p><h1 id="2021-12-10-FRIDAY-TA551-SHATHAK-ICEDID-BOKBOT-WITH-COBALT-STRIKE-AND-DARK-VNC"><a href="#2021-12-10-FRIDAY-TA551-SHATHAK-ICEDID-BOKBOT-WITH-COBALT-STRIKE-AND-DARK-VNC" class="headerlink" title="2021-12-10 (FRIDAY) - TA551 (SHATHAK) ICEDID (BOKBOT) WITH COBALT STRIKE AND DARK VNC"></a>2021-12-10 (FRIDAY) - TA551 (SHATHAK) ICEDID (BOKBOT) WITH COBALT STRIKE AND DARK VNC</h1><p><a target="_blank" rel="noopener" href="https://www.malware-traffic-analysis.net/2021/12/10/index.html">https://www.malware-traffic-analysis.net/2021/12/10/index.html</a></p>
-<p><img src="https://scr1pt-1302658871.cos.ap-chengdu.myqcloud.com/img/FGSeYrxX0AMNOla.jpg" alt="Tweets with replies by Cryptolaemus (@Cryptolaemus1) / Twitter"></p></p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-03-23</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 1655 words, 5 min 31 sec  read</span></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2022/03/23/cruloader/">cruloader</a></h3></div><div class="post-content"><div class="card"><p><h1 id="Cruloader"><a href="#Cruloader" class="headerlink" title="Cruloader"></a>Cruloader</h1><h2 id="1th-Stage"><a href="#1th-Stage" class="headerlink" title="1th Stage"></a>1th Stage</h2><p>一到main函数就是一个加密函数，我们编写脚本去恢复</p></p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-03-23</span><i class="fa fa-tag"></i><span class="leancloud_visitors"></span><span>About 934 words, 3 min 6 sec  read</span></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/page/2/">Next</a></li></ul></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"Posts",PAGES:"Pages",CATEGORIES:"Categories",TAGS:"Tags",UNTITLED:"(Untitled)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
+</blockquote></p></div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2022-03-29</span><i class="fa fa-tag"></i><a class="tag" href="/tags/linux/" title="linux">linux </a><span class="leancloud_visitors"></span><span>About 1108 words, 3 min 41 sec  read</span></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/page/2/">Next</a></li></ul></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"Posts",PAGES:"Pages",CATEGORIES:"Categories",TAGS:"Tags",UNTITLED:"(Untitled)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
